@@ -1,0 +1,19 @@
+{
+  "name": "svg-loader",
+  "version": "0.0.2",
+  "description": "svg inline loader for webpack",
+  "main": "index.js",
+  "scripts": {},
+  "keywords": [
+    "svg",
+    "inline",
+    "loader",
+    "webpack"
+  ],
+  "author": "Victor Zakharenko",
+  "license": "MIT",
+  "dependencies": {
+    "loader-utils": "^0.2.15",
+    "svgo": "^0.6.6"
+  }
+}
