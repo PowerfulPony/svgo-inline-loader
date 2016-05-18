@@ -2,7 +2,13 @@
 
 var loaderUtils = require('loader-utils');
 var SVGO = require('svgo');
-var svgo = new SVGO();
+var svgo = new SVGO({
+  plugins: [{
+    removeTitle: true
+  }, {
+    removeDimensions: true
+  }]
+});
 
 module.exports = function(content) {
   this.cacheable && this.cacheable();
