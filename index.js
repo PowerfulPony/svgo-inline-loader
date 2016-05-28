@@ -7,6 +7,8 @@ var svgo = new SVGO({
     removeTitle: true
   }, {
     removeDimensions: true
+  }, {
+    removeUselessStrokeAndFill: false
   }]
 });
 
@@ -28,6 +30,6 @@ module.exports = function(content) {
   svgo.optimize(output, function(result) {
     output = result.data;
   })
-
+  
   return "module.exports = '" + output + "'";
 }
