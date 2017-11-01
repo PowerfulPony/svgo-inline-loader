@@ -1,6 +1,6 @@
 {
-  "name": "svg-loader",
-  "version": "0.0.2",
+  "name": "svgo-inline-loader",
+  "version": "0.0.3",
   "description": "svg inline loader for webpack",
   "main": "index.js",
   "scripts": {},
@@ -13,7 +13,14 @@
   "author": "Victor Zakharenko",
   "license": "MIT",
   "dependencies": {
-    "loader-utils": "^0.2.15",
-    "svgo": "^0.6.6"
-  }
+    "svgo": "^1.0.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PowerfulPony/svgo-inline-loader.git"
+  },
+  "bugs": {
+    "url": "https://github.com/PowerfulPony/svgo-inline-loader/issues"
+  },
+  "homepage": "https://github.com/PowerfulPony/svgo-inline-loader#readme"
 }

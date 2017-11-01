@@ -1,8 +1,6 @@
-'use strict';
+const SVGO = require('svgo');
 
-var loaderUtils = require('loader-utils');
-var SVGO = require('svgo');
-var svgo = new SVGO({
+const svgo = new SVGO({
   plugins: [{
     removeTitle: true
   }, {
@@ -12,24 +10,23 @@ var svgo = new SVGO({
   }]
 });
 
-module.exports = function(content) {
-  this.cacheable && this.cacheable();
+module.exports = function loader(content) {
+  if (this.cacheable) this.cacheable();
 
-  var output = '' + content;
-
-  var query = loaderUtils.parseQuery(this.query);
+  const { query } = this;
+  let output = `${content}`;
 
   if (query && query.remove) {
-    for (var i = query.remove.length - 1; i >= 0; i--) {
-      var removable = query.remove[i];
-      var re = new RegExp(removable, 'gim');
+    for (let i = query.remove.length - 1; i >= 0; i -= 1) {
+      const removable = query.remove[i];
+      const re = new RegExp(removable, 'gim');
       output = output.replace(re, '');
     }
   }
 
-  svgo.optimize(output, function(result) {
+  svgo.optimize(output, (result) => {
     output = result.data;
-  })
-  
-  return "module.exports = '" + output + "'";
-}
+  });
+
+  return `module.exports = '${output}'`;
+};
