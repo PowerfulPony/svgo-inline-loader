@@ -13,6 +13,7 @@ const svgo = new SVGO({
 module.exports = function loader(content) {
   if (this.cacheable) this.cacheable();
 
+  const callback = this.async();
   const { query } = this;
   let output = `${content}`;
 
@@ -24,9 +25,10 @@ module.exports = function loader(content) {
     }
   }
 
-  svgo.optimize(output, (result) => {
+  svgo.optimize(output).then((result) => {
     output = result.data;
+    return output;
+  }).then(() => {
+    callback(null, `module.exports = '${output}'`);
   });
-
-  return `module.exports = '${output}'`;
 };
