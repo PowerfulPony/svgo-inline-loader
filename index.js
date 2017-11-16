@@ -1,34 +1,15 @@
 const SVGO = require('svgo');
 
-const svgo = new SVGO({
-  plugins: [{
-    removeTitle: true
-  }, {
-    removeDimensions: true
-  }, {
-    removeUselessStrokeAndFill: false
-  }]
-});
-
-module.exports = function loader(content) {
-  if (this.cacheable) this.cacheable();
-
+module.exports = function loader(source) {
+  this.cacheable(true);
   const callback = this.async();
-  const { query } = this;
-  let output = `${content}`;
 
-  if (query && query.remove) {
-    for (let i = query.remove.length - 1; i >= 0; i -= 1) {
-      const removable = query.remove[i];
-      const re = new RegExp(removable, 'gim');
-      output = output.replace(re, '');
-    }
-  }
+  const svgo = new SVGO(this.options);
 
-  svgo.optimize(output).then((result) => {
-    output = result.data;
-    return output;
-  }).then(() => {
-    callback(null, `module.exports = '${output}'`);
-  });
+  svgo.optimize(source)
+    .then(result => result.data)
+    .then((result) => {
+      callback(null, `module.exports = '${result}'`);
+    })
+    .catch(error => callback(new Error(error)));
 };

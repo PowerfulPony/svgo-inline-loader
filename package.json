@@ -1,16 +1,18 @@
 {
   "name": "svgo-inline-loader",
-  "version": "0.0.4",
-  "description": "svg inline loader for webpack",
+  "author": "Victor Zakharenko  <victor@pony.ninja>",
+  "version": "0.0.5",
+  "description": "The loader for webpack, returns a module consisting of a string of optimized SVG files using the SVGO library",
   "main": "index.js",
   "scripts": {},
   "keywords": [
     "svg",
+    "svgo",
     "inline",
+    "string",
     "loader",
     "webpack"
   ],
-  "author": "Victor Zakharenko",
   "license": "MIT",
   "dependencies": {
     "svgo": "^1.0.1"
