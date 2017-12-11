@@ -4,7 +4,7 @@ module.exports = function loader(source) {
   this.cacheable(true);
   const callback = this.async();
 
-  const svgo = new SVGO(this.options);
+  const svgo = new SVGO(this.query);
 
   svgo.optimize(source)
     .then(result => result.data)
