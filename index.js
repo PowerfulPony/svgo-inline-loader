@@ -1,15 +1,20 @@
-const SVGO = require('svgo');
+const { optimize } = require('svgo');
+
+const defaultConfig = {
+  plugins: [
+    { name: 'preset-default' },
+    'removeScriptElement'
+  ]
+};
 
 module.exports = function loader(source) {
   this.cacheable(true);
-  const callback = this.async();
 
-  const svgo = new SVGO(this.query);
+  try {
+    const result = optimize(source, { ...defaultConfig, ...this.query });
 
-  svgo.optimize(source)
-    .then(result => result.data)
-    .then((result) => {
-      callback(null, `module.exports = '${result}'`);
-    })
-    .catch(error => callback(new Error(error)));
+    return `module.exports = '${result.data}'`;
+  } catch (error) {
+    throw new Error(error);
+  }
 };

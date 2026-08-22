@@ -5,13 +5,13 @@ module.exports = {
     sourceType: 'module'
   },
   env: {
-    node: true,
+    node: true
   },
   extends: 'airbnb-base',
-  'rules': {
+  rules: {
     'comma-dangle': [1, 'never'],
     'linebreak-style': 0,
     'eol-last': 0,
     'import/no-unresolved': 0
   }
-}
+};
